@@ -183,7 +183,7 @@ const ROTATIONS: Array<"-3" | "-2" | "2" | "3" | "0"> = [
 export default function HomePage() {
   const [moments, setMoments] = useState<Moment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("Semua");
+  const [filter, setFilter] = useState("All");
   const [uploadOpen, setUploadOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -226,7 +226,7 @@ export default function HomePage() {
   }, []);
 
   const filtered = useMemo(() => {
-    if (filter === "Semua") return moments;
+    if (filter === "All") return moments;
     return moments.filter((m) => m.day === filter);
   }, [moments, filter]);
 
@@ -327,13 +327,6 @@ export default function HomePage() {
           </div>
         )}
       </section>
-
-      {/* Sponsor strip, matches main site footer treatment */}
-      <footer className="border-t-4 border-ink bg-ink text-cream py-4 overflow-hidden">
-        <p className="font-mono text-sm text-center">
-          Bagian dari Quatrolympic 19 · SMA Islam Al Azhar 4
-        </p>
-      </footer>
 
       <UploadModal
         open={uploadOpen}

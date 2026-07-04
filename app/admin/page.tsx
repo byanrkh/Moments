@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase, Moment } from "@/lib/supabase";
 import { Lock, Trash2, LogOut, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const SESSION_KEY = "quatro_admin_pin";
 
@@ -16,6 +17,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [confirmId, setConfirmId] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const saved = sessionStorage.getItem(SESSION_KEY);
@@ -63,6 +65,7 @@ export default function AdminPage() {
   }
 
   function handleLogout() {
+    router.push("/");
     sessionStorage.removeItem(SESSION_KEY);
     setAuthedPin(null);
     setMoments([]);
@@ -102,9 +105,6 @@ export default function AdminPage() {
           <h1 className="font-display font-extrabold text-2xl uppercase mb-2">
             Admin Access
           </h1>
-          <p className="font-body text-sm text-ink/70 mb-6">
-            Masukkan PIN untuk mengelola momen Quatrolympic
-          </p>
 
           <input
             type="password"
@@ -156,18 +156,18 @@ export default function AdminPage() {
       </header>
 
       <section className="px-4 md:px-10 py-8 max-w-6xl mx-auto">
-        <p className="font-body text-sm text-ink/70 mb-6">
+        {/* <p className="font-body text-sm text-ink/70 mb-6">
           {moments.length} foto total. Klik hapus untuk menghilangkan foto dari
           galeri publik.
-        </p>
+        </p> */}
 
         {loading ? (
           <p className="font-mono text-center text-ink/60 py-16">
-            Memuat data...
+            Loading data...
           </p>
         ) : moments.length === 0 ? (
           <p className="font-mono text-center text-ink/60 py-16">
-            Belum ada foto.
+            No photos yet...
           </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">

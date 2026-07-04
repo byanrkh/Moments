@@ -1,7 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { supabase, MOMENTS_BUCKET, QUATRO_DAYS, Moment, QuatroDay } from "@/lib/supabase";
+import {
+  supabase,
+  MOMENTS_BUCKET,
+  QUATRO_DAYS,
+  Moment,
+  QuatroDay,
+} from "@/lib/supabase";
 
 const MAX_FILE_MB = 10;
 
@@ -19,7 +25,9 @@ export default function UploadModal({
   const [caption, setCaption] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [status, setStatus] = useState<"idle" | "uploading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "uploading" | "success" | "error"
+  >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,7 +52,9 @@ export default function UploadModal({
       return;
     }
     if (f.size > MAX_FILE_MB * 1024 * 1024) {
-      setErrorMsg(`Ukuran foto maksimal ${MAX_FILE_MB}MB. Coba kompres dulu ya.`);
+      setErrorMsg(
+        `Ukuran foto maksimal ${MAX_FILE_MB}MB. Coba kompres dulu ya.`,
+      );
       return;
     }
 
@@ -128,7 +138,7 @@ export default function UploadModal({
       <div className="relative w-full md:max-w-lg max-h-[92vh] overflow-y-auto bg-cream border-4 border-ink shadow-brutal-lg rounded-t-2xl md:rounded-sm p-6">
         <div className="flex items-start justify-between mb-4">
           <h2 className="font-display font-extrabold text-2xl">
-            Upload Momen Kamu
+            Upload Your Moment
           </h2>
           <button
             onClick={() => {
@@ -146,14 +156,14 @@ export default function UploadModal({
 
         {status === "success" ? (
           <div className="bg-lime border-4 border-ink p-6 text-center font-display font-bold">
-            Foto kamu berhasil diupload! 🎉
+            Uploaded! 🎉
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Username */}
             <div>
               <label className="block font-display font-bold text-sm mb-1">
-                Username Instagram
+                Instagram Username
               </label>
               <div className="flex items-center border-4 border-ink bg-white focus-within:bg-sky/20">
                 <span className="pl-3 font-mono font-bold text-ink/60">@</span>
@@ -161,7 +171,7 @@ export default function UploadModal({
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="username_kamu"
+                  placeholder="Instagram Username"
                   className="w-full bg-transparent px-2 py-2 outline-none font-body"
                   maxLength={60}
                   required
@@ -172,7 +182,7 @@ export default function UploadModal({
             {/* Day */}
             <div>
               <label className="block font-display font-bold text-sm mb-1">
-                Hari
+                Day...
               </label>
               <div className="flex flex-wrap gap-2">
                 {QUATRO_DAYS.map((d) => (
@@ -193,7 +203,7 @@ export default function UploadModal({
             {/* Photo */}
             <div>
               <label className="block font-display font-bold text-sm mb-1">
-                Foto
+                Attachment
               </label>
               <input
                 ref={fileInputRef}
@@ -209,10 +219,10 @@ export default function UploadModal({
                   className="flex flex-col items-center justify-center gap-1 border-4 border-dashed border-ink bg-white py-8 cursor-pointer hover:bg-cream transition-colors"
                 >
                   <span className="font-display font-bold">
-                    Ketuk untuk pilih foto
+                    Tap to select a Photo atau Click to choose a Photo
                   </span>
                   <span className="font-mono text-[11px] text-ink/60">
-                    JPG, PNG, atau WEBP · maks {MAX_FILE_MB}MB
+                    JPG, PNG, or WEBP · max 10MB
                   </span>
                 </label>
               ) : (
@@ -232,7 +242,7 @@ export default function UploadModal({
                     }}
                     className="absolute top-2 right-2 bg-white border-2 border-ink px-2 py-1 font-mono text-xs font-bold hover:bg-pink"
                   >
-                    Ganti
+                    Change
                   </button>
                 </div>
               )}
@@ -247,7 +257,7 @@ export default function UploadModal({
                 value={caption}
                 onChange={(e) => setCaption(e.target.value.slice(0, 300))}
                 rows={3}
-                placeholder="Ceritain momen serunya..."
+                placeholder="Share your exciting moment..."
                 className="w-full border-4 border-ink bg-white px-3 py-2 outline-none font-body resize-none focus-within:bg-sky/20"
               />
               <p className="mt-1 text-right font-mono text-[10px] text-ink/50">
@@ -266,7 +276,7 @@ export default function UploadModal({
               disabled={status === "uploading"}
               className="w-full bg-lime border-4 border-ink shadow-brutal-sm font-display font-extrabold text-lg py-3 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {status === "uploading" ? "Mengupload..." : "Upload Momen"}
+              {status === "uploading" ? "Uploading..." : "Upload Moment"}
             </button>
           </form>
         )}

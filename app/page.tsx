@@ -289,7 +289,7 @@ export default function HomePage() {
           onClick={() => setUploadOpen(true)}
           className="mt-7 inline-block bg-lime border-4 border-ink shadow-brutal font-display font-extrabold text-lg px-8 py-3 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
         >
-          Upload Momen Kamu
+          Upload Your Moment
         </button>
       </section>
 
@@ -302,16 +302,16 @@ export default function HomePage() {
       <section className="px-4 md:px-10 py-10 max-w-6xl mx-auto">
         {loading ? (
           <p className="font-mono text-center text-ink/60 py-16">
-            Memuat momen...
+            Loading Moments...
           </p>
         ) : filtered.length === 0 ? (
           <div className="text-center py-16 border-4 border-dashed border-ink/40 mx-auto max-w-md">
             <p className="font-display font-bold text-xl mb-2">
-              Belum ada momen di sini
+              No moments here yet
             </p>
             <p className="font-body text-sm text-ink/70">
-              Jadilah yang pertama upload foto untuk{" "}
-              {filter === "Semua" ? "Quatrolympic 19" : filter}!
+              Be the first to upload a photo for{" "}
+              {filter === "All" ? "Quatrolympic 19" : filter}!
             </p>
           </div>
         ) : (
